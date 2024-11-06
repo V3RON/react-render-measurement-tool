@@ -1,23 +1,31 @@
-import { DevToolsProfilingHooks } from './types.ts';
+/**
+ * This file must be executed before 'react'.
+ *
+ * ### Usage in Jest
+ * To ensure correct execution order in Jest, add this file to the `setupFiles` array
+ * in the Jest configuration (e.g., `jest.config.js` or `package.json`):
+ *
+ * ```js
+ * // jest.config.js
+ * module.exports = {
+ *   setupFiles: ["<rootDir>/path/to/this/file.js"]
+ * };
+ * ```
+ *
+ * ### Usage in Vitest
+ * For Vitest, use the `setupFiles` option in the configuration file (e.g., `vite.config.js` or `vitest.config.js`):
+ *
+ * ```js
+ * // vitest.config.js
+ * import { defineConfig } from 'vitest/config';
+ *
+ * export default defineConfig({
+ *   test: {
+ *     setupFiles: ["<rootDir>/path/to/this/file.js"]
+ *   }
+ * });
+ * ```
+ */
 
-interface ReactRenderer {
-  version: string;
-  rendererPackageName: string;
-  injectProfilingHooks: (profilingHooks: DevToolsProfilingHooks) => void;
-}
-
-let uidCounter = 0;
-
-const devtoolsHook = {
-  _renderers: [] as ReactRenderer[],
-  supportsFiber: true,
-  inject: function (renderer: ReactRenderer) {
-    const id = ++uidCounter;
-    this._renderers.push(renderer);
-    return id;
-  },
-  onCommitFiberRoot: () => {},
-  onCommitFiberUnmount: () => {},
-};
-
-global.__REACT_DEVTOOLS_GLOBAL_HOOK__ = devtoolsHook;
+import { initialize } from "react-devtools-core";
+initialize();
