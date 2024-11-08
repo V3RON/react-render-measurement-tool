@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "esnext",
+		"skipLibCheck": true,
+		"outDir": "./dist",
+		"isolatedModules": true,
+		"strict": true,
+		"moduleResolution": "node"
+	},
+	"include": ["src"],
+	"exclude": ["./src/**/*.test.tsx"]
+}

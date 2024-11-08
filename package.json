@@ -3,7 +3,25 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
+	"main": "./dist/cjs/index.js",
+	"module": "./dist/esm/index.js",
+	"types": "./dist/types/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/types/index.d.ts",
+			"require": "./dist/cjs/index.js",
+			"import": "./dist/esm/index.js",
+			"default": "./dist/esm/index.js"
+		},
+		"./setup": {
+			"types": "./dist/types/setup.d.ts",
+			"require": "./dist/cjs/setup.js",
+			"import": "./dist/esm/setup.js",
+			"default": "./dist/esm/setup.js"
+		}
+	},
 	"scripts": {
+		"build": "tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json",
 		"test": "vitest",
 		"lint": "biome lint",
 		"format": "biome format --write",
