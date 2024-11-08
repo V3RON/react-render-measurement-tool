@@ -1,10 +1,7 @@
+import fs from "node:fs";
 import userEvent from "@testing-library/user-event";
-import React, {
-	Suspense,
-	useState,
-} from 'react';
+import React, { Suspense, useState } from "react";
 import { expect, it } from "vitest";
-import fs from 'fs';
 import { measure } from "./measure";
 
 const Screen = () => {
@@ -12,7 +9,9 @@ const Screen = () => {
 
 	return (
 		<div>
-			<button onClick={() => setV((n) => n + 1)}>Update Screen</button>
+			<button type="button" onClick={() => setV((n) => n + 1)}>
+				Update Screen
+			</button>
 			<span>Screen: {v}</span>
 
 			<NestedComponent />
@@ -25,7 +24,9 @@ const NestedComponent = () => {
 
 	return (
 		<div>
-			<button onClick={() => setV((n) => n + 1)}>Update NestedComponent</button>
+			<button type="button" onClick={() => setV((n) => n + 1)}>
+				Update NestedComponent
+			</button>
 			<span>NestedComponent: {v}</span>
 		</div>
 	);
@@ -57,16 +58,22 @@ it("should count renders", async () => {
 		expect.objectContaining({ componentType: Screen }),
 	);
 
-	fs.writeFileSync('./profile.json', JSON.stringify(exportProfilingData(), null, 2));
+	fs.writeFileSync(
+		"./profile.json",
+		JSON.stringify(exportProfilingData(), null, 2),
+	);
 });
 
 const LazyLoadedComponent = () => {
 	return <div>Lazy loaded!</div>;
-}
+};
 
-const LazyComponent = React.lazy<typeof LazyLoadedComponent>(() => new Promise((resolve) => {
-	setTimeout(() => resolve({ default: LazyLoadedComponent }), 2000);
-}));
+const LazyComponent = React.lazy<typeof LazyLoadedComponent>(
+	() =>
+		new Promise((resolve) => {
+			setTimeout(() => resolve({ default: LazyLoadedComponent }), 2000);
+		}),
+);
 
 it("should work just fine with React.lazy", async () => {
 	const { commits, exportProfilingData } = await measure(
@@ -75,11 +82,14 @@ it("should work just fine with React.lazy", async () => {
 		</Suspense>,
 		{
 			scenario: async (screen) => {
-				await screen.findByText('Lazy loaded!', {}, { timeout: 5000 });
+				await screen.findByText("Lazy loaded!", {}, { timeout: 5000 });
 			},
-		}
+		},
 	);
 
 	expect(commits).toHaveLength(2);
-	fs.writeFileSync('./profile.json', JSON.stringify(exportProfilingData(), null, 2));
+	fs.writeFileSync(
+		"./profile.json",
+		JSON.stringify(exportProfilingData(), null, 2),
+	);
 });
