@@ -103,17 +103,17 @@ export type ChangeData = {
 	state: string[] | null;
 	hooks: number[] | null;
 	componentType: ComponentType | null;
-}
+};
 
 export type CommitData = {
 	duration: number;
 	priorityLevel: string | null;
 	timestamp: number;
 	changes: ChangeData[];
-}
+};
 
 export type MeasureResult = {
 	commits: CommitData[];
 	rawProfilingData: ProfilingDataBackend;
 	exportProfilingData: () => unknown;
-}
+};

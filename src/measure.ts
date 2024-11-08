@@ -1,9 +1,6 @@
 import { type RenderResult, render } from "@testing-library/react";
 import type * as React from "react";
-import {
-	MeasureResult,
-	RendererInterface,
-} from './types';
+import type { MeasureResult, RendererInterface } from "./types";
 
 const getRendererInterface = (): RendererInterface => {
 	const hook = __REACT_DEVTOOLS_GLOBAL_HOOK__;
@@ -31,14 +28,17 @@ const getRendererInterface = (): RendererInterface => {
 const getOperations = (devTools: RendererInterface): number[][] => {
 	const operations: number[][] = [];
 
-	const unsubscribe = __REACT_DEVTOOLS_GLOBAL_HOOK__.sub('operations', (data) => {
-		operations.push(data);
-	});
+	const unsubscribe = __REACT_DEVTOOLS_GLOBAL_HOOK__.sub(
+		"operations",
+		(data) => {
+			operations.push(data as number[]);
+		},
+	);
 	devTools.flushInitialOperations();
 
 	unsubscribe();
 	return operations;
-}
+};
 
 export interface MeasureOptions {
 	scenario?: (screen: RenderResult) => Promise<void>;
@@ -67,16 +67,18 @@ export const measure = async (
 
 	return {
 		rawProfilingData: profilingData,
-		commits: rootData.commitData.map(commit => ({
-			changes: commit.changeDescriptions ? commit.changeDescriptions.map(([fiberId, change]) => ({
-				isFirstMount: change.isFirstMount,
-				didHooksChange: change.didHooksChange,
-				props: change.props,
-				state: change.state,
-				hooks: change.hooks ?? null,
-				context: change.context,
-				componentType: devTools.getElementSourceFunctionById(fiberId),
-			})) : [],
+		commits: rootData.commitData.map((commit) => ({
+			changes: commit.changeDescriptions
+				? commit.changeDescriptions.map(([fiberId, change]) => ({
+						isFirstMount: change.isFirstMount,
+						didHooksChange: change.didHooksChange,
+						props: change.props,
+						state: change.state,
+						hooks: change.hooks ?? null,
+						context: change.context,
+						componentType: devTools.getElementSourceFunctionById(fiberId),
+					}))
+				: [],
 			timestamp: commit.timestamp,
 			duration: commit.duration,
 			priorityLevel: commit.priorityLevel,
@@ -87,7 +89,7 @@ export const measure = async (
 				{
 					...rootData,
 					operations,
-				}
+				},
 			],
 			timelineData: undefined,
 		}),
