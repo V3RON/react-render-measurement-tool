@@ -1,48 +1,95 @@
-import * as React from 'react';
+import { type RenderResult, render } from "@testing-library/react";
+import type * as React from "react";
 import {
-  render,
-  RenderResult,
-} from '@testing-library/react';
-import {
-  DevToolsProfilingHooks,
-  ProfilingData,
-} from './types.ts';
+	MeasureResult,
+	RendererInterface,
+} from './types';
+
+const getRendererInterface = (): RendererInterface => {
+	const hook = __REACT_DEVTOOLS_GLOBAL_HOOK__;
+
+	if (
+		!hook ||
+		typeof hook !== "object" ||
+		!("rendererInterfaces" in hook) ||
+		!(hook.rendererInterfaces instanceof Map)
+	) {
+		throw new Error(
+			"Value of __REACT_DEVTOOLS_GLOBAL_HOOK__ is different than expected.",
+		);
+	}
+
+	const devTools = hook.rendererInterfaces.get(1);
+
+	if (!devTools) {
+		throw new Error("Invalid renderer detected.");
+	}
+
+	return devTools as RendererInterface;
+};
+
+const getOperations = (devTools: RendererInterface): number[][] => {
+	const operations: number[][] = [];
+
+	const unsubscribe = __REACT_DEVTOOLS_GLOBAL_HOOK__.sub('operations', (data) => {
+		operations.push(data);
+	});
+	devTools.flushInitialOperations();
+
+	unsubscribe();
+	return operations;
+}
 
 export interface MeasureOptions {
-  scenario?: (screen: RenderResult) => Promise<void>;
+	scenario?: (screen: RenderResult) => Promise<void>;
 }
 
-export const measure = async (ui: React.ReactElement, options?: MeasureOptions): Promise<ProfilingData[]> => {
-  console.assert(global.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers.length === 1);
-  const renderer = global.__REACT_DEVTOOLS_GLOBAL_HOOK__._renderers.at(0)!;
+export const measure = async (
+	ui: React.ReactElement,
+	options?: MeasureOptions,
+): Promise<MeasureResult> => {
+	const devTools = getRendererInterface();
 
-  const profilingData: ProfilingData[] = [];
-  let currentData: ProfilingData = null!;
+	devTools.startProfiling(true, true);
+	const renderResult = render(ui);
 
-  const profilingHooks: DevToolsProfilingHooks = {
-    markRenderStarted: (lanes) => {
-      currentData = { start: performance.now(), stop: 0, duration: 0, lanes, components: [] };
-    },
-    markComponentRenderStarted: (fiber) => {
-      currentData.components.push(fiber.type);
-    },
-    markRenderStopped: () => {
-      currentData.stop = performance.now();
-      currentData.duration = currentData.stop - currentData.start;
-      profilingData.push(currentData);
-      currentData = null!;
-    }
-  };
+	if (options?.scenario) {
+		await options.scenario(renderResult);
+	}
 
-  renderer.injectProfilingHooks(profilingHooks);
+	devTools.stopProfiling();
 
-  const renderResult = render(ui);
+	const profilingData = devTools.getProfilingData();
+	const operations = getOperations(devTools);
 
-  if (options?.scenario) {
-    await options.scenario(renderResult);
-  }
+	console.assert(profilingData.dataForRoots.length === 1);
+	const rootData = profilingData.dataForRoots[0];
 
-  renderer.injectProfilingHooks(null!);
-
-  return profilingData;
-}
+	return {
+		rawProfilingData: profilingData,
+		commits: rootData.commitData.map(commit => ({
+			changes: commit.changeDescriptions ? commit.changeDescriptions.map(([fiberId, change]) => ({
+				isFirstMount: change.isFirstMount,
+				didHooksChange: change.didHooksChange,
+				props: change.props,
+				state: change.state,
+				hooks: change.hooks ?? null,
+				context: change.context,
+				componentType: devTools.getElementSourceFunctionById(fiberId),
+			})) : [],
+			timestamp: commit.timestamp,
+			duration: commit.duration,
+			priorityLevel: commit.priorityLevel,
+		})),
+		exportProfilingData: () => ({
+			version: 5,
+			dataForRoots: [
+				{
+					...rootData,
+					operations,
+				}
+			],
+			timelineData: undefined,
+		}),
+	};
+};

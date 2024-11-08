@@ -1,51 +1,85 @@
-import { measure } from './measure.ts';
-import userEvent from '@testing-library/user-event'
-import { it, expect } from 'vitest'
-import { useState } from 'react';
+import userEvent from "@testing-library/user-event";
+import React, {
+	Suspense,
+	useState,
+} from 'react';
+import { expect, it } from "vitest";
+import fs from 'fs';
+import { measure } from "./measure";
 
 const Screen = () => {
-  const [v, setV] = useState(0);
+	const [v, setV] = useState(0);
 
-  return (
-    <div>
-      <button onClick={() => setV(n => n + 1)}>Update Screen</button>
-      <span>Screen: {v}</span>
+	return (
+		<div>
+			<button onClick={() => setV((n) => n + 1)}>Update Screen</button>
+			<span>Screen: {v}</span>
 
-      <NestedComponent />
-    </div>
-  )
-}
+			<NestedComponent />
+		</div>
+	);
+};
 
 const NestedComponent = () => {
-  const [v, setV] = useState(0);
+	const [v, setV] = useState(0);
 
-  return (
-    <div>
-      <button onClick={() => setV(n => n + 1)}>Update NestedComponent</button>
-      <span>NestedComponent: {v}</span>
-    </div>
-  )
+	return (
+		<div>
+			<button onClick={() => setV((n) => n + 1)}>Update NestedComponent</button>
+			<span>NestedComponent: {v}</span>
+		</div>
+	);
+};
+
+it("should count renders", async () => {
+	const { commits, exportProfilingData } = await measure(<Screen />, {
+		scenario: async (screen) => {
+			await userEvent.click(screen.getByText("Update Screen"));
+
+			await userEvent.click(screen.getByText("Update NestedComponent"));
+		},
+	});
+
+	expect(commits).toHaveLength(3);
+
+	const firstCommit = commits[0];
+	expect(firstCommit.changes).toHaveLength(2);
+
+	const secondCommit = commits[1];
+	expect(secondCommit.changes).toHaveLength(2);
+
+	const thirdCommit = commits[2];
+	expect(thirdCommit.changes).toHaveLength(1);
+	expect(thirdCommit.changes).toContainEqual(
+		expect.objectContaining({ componentType: NestedComponent }),
+	);
+	expect(thirdCommit.changes).not.toContainEqual(
+		expect.objectContaining({ componentType: Screen }),
+	);
+
+	fs.writeFileSync('./profile.json', JSON.stringify(exportProfilingData(), null, 2));
+});
+
+const LazyLoadedComponent = () => {
+	return <div>Lazy loaded!</div>;
 }
 
-it('should count renders', async () => {
-  const stats = await measure(<Screen />, {
-    scenario: async (screen) => {
-      await userEvent.click(screen.getByText('Update Screen'));
+const LazyComponent = React.lazy<typeof LazyLoadedComponent>(() => new Promise((resolve) => {
+	setTimeout(() => resolve({ default: LazyLoadedComponent }), 2000);
+}));
 
-      await userEvent.click(screen.getByText('Update NestedComponent'));
-    }
-  });
+it("should work just fine with React.lazy", async () => {
+	const { commits, exportProfilingData } = await measure(
+		<Suspense fallback={<div>Loading</div>}>
+			<LazyComponent />
+		</Suspense>,
+		{
+			scenario: async (screen) => {
+				await screen.findByText('Lazy loaded!', {}, { timeout: 5000 });
+			},
+		}
+	);
 
-  expect(stats).toHaveLength(3);
-
-  expect(stats[0].components).toHaveLength(2);
-  expect(stats[0].components).toContain(Screen);
-  expect(stats[0].components).toContain(NestedComponent);
-
-  expect(stats[1].components).toHaveLength(2);
-  expect(stats[1].components).toContain(Screen);
-  expect(stats[1].components).toContain(NestedComponent);
-
-  expect(stats[2].components).toHaveLength(1);
-  expect(stats[2].components).toContain(NestedComponent);
-})
+	expect(commits).toHaveLength(2);
+	fs.writeFileSync('./profile.json', JSON.stringify(exportProfilingData(), null, 2));
+});
