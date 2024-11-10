@@ -11,7 +11,7 @@
 		"check:apply": "biome check --apply"
 	},
 	"dependencies": {
-		"react-devtools-core": "^6.0.1"
+		"react-devtools-inline": "^6.0.1"
 	},
 	"peerDependencies": {
 		"@testing-library/react": "^16.0.1",
@@ -22,6 +22,7 @@
 		"@testing-library/user-event": "^14.5.2",
 		"@types/node": "^22.7.7",
 		"@types/react": "^18.3.11",
+		"@types/react-devtools-inline": "^4.24.8",
 		"jsdom": "^25.0.1",
 		"lefthook": "^1.8.2",
 		"typescript": "^5.6.3",

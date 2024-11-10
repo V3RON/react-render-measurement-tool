@@ -1,44 +1,7 @@
 import { type RenderResult, render } from "@testing-library/react";
 import type * as React from "react";
-import type { MeasureResult, RendererInterface } from "./types";
-
-const getRendererInterface = (): RendererInterface => {
-	const hook = __REACT_DEVTOOLS_GLOBAL_HOOK__;
-
-	if (
-		!hook ||
-		typeof hook !== "object" ||
-		!("rendererInterfaces" in hook) ||
-		!(hook.rendererInterfaces instanceof Map)
-	) {
-		throw new Error(
-			"Value of __REACT_DEVTOOLS_GLOBAL_HOOK__ is different than expected.",
-		);
-	}
-
-	const devTools = hook.rendererInterfaces.get(1);
-
-	if (!devTools) {
-		throw new Error("Invalid renderer detected.");
-	}
-
-	return devTools as RendererInterface;
-};
-
-const getOperations = (devTools: RendererInterface): number[][] => {
-	const operations: number[][] = [];
-
-	const unsubscribe = __REACT_DEVTOOLS_GLOBAL_HOOK__.sub(
-		"operations",
-		(data) => {
-			operations.push(data as number[]);
-		},
-	);
-	devTools.flushInitialOperations();
-
-	unsubscribe();
-	return operations;
-};
+import { getOperations, getRendererInterface } from "./devtools.ts";
+import type { MeasureResult } from "./types";
 
 export interface MeasureOptions {
 	scenario?: (screen: RenderResult) => Promise<void>;
@@ -50,7 +13,7 @@ export const measure = async (
 ): Promise<MeasureResult> => {
 	const devTools = getRendererInterface();
 
-	devTools.startProfiling(true, true);
+	devTools.startProfiling(true);
 	const renderResult = render(ui);
 
 	if (options?.scenario) {

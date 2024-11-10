@@ -14,7 +14,7 @@ importers:
       react:
         specifier: ^18
         version: 18.3.1
-      react-devtools-core:
+      react-devtools-inline:
         specifier: ^6.0.1
         version: 6.0.1
     devDependencies:
@@ -30,6 +30,9 @@ importers:
       '@types/react':
         specifier: ^18.3.11
         version: 18.3.11
+      '@types/react-devtools-inline':
+        specifier: ^4.24.8
+        version: 4.24.8
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1
@@ -371,8 +374,14 @@ packages:
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
 
+  '@types/react-devtools-inline@4.24.8':
+    resolution: {integrity: sha512-hx6l47j2oRvqHKpbtSdvZV185NjJUEDrz7QW02cz2k02cceVoXx+WfAvuFj5x0c8/9Wymw/X7dOeRRqs3gaukA==}
+
   '@types/react-dom@18.3.1':
     resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
+
+  '@types/react-reconciler@0.28.8':
+    resolution: {integrity: sha512-SN9c4kxXZonFhbX4hJrZy37yw9e7EIxcpHCxQv5JUS18wDE5ovkQKlqQEkufdJCCMfuI9BnjUJvhYeJ9x5Ra7g==}
 
   '@types/react@18.3.11':
     resolution: {integrity: sha512-r6QZ069rFTjrEYgFdOck1gK7FLVsgJE7tTz0pQBczlBNUhBNk0MQH4UbnFSwjpQLMkLzgqvBBa+qGpLje16eTQ==}
@@ -666,8 +675,8 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  react-devtools-core@6.0.1:
-    resolution: {integrity: sha512-II3iSJhnR5nAscYDa9FCgPLq8mO5aEx/EKKtdXYTDnvdFEa3K7gs3jn1SKRXwQf9maOmIilmjnnx7Qy+3annPA==}
+  react-devtools-inline@6.0.1:
+    resolution: {integrity: sha512-AT79dsZmU8YLSb8Bax52KZHzqKIl7eC6jW0x1gO1KUmtzOvwJM1mBDyCame3N6gLsg2ScuTL7DyOG39qTik94g==}
 
   react-dom@18.3.1:
     resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
@@ -702,15 +711,20 @@ packages:
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
-  shell-quote@1.8.1:
-    resolution: {integrity: sha512-6j1W9l1iAs/4xYBI1SYOVZyFcCis9b4KCLQ8fgAGG07QvzaRLVVRQvAy85yNmmZSjYjg4MWh4gNvlPujU/5LpA==}
-
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
+
+  source-map-js@0.6.2:
+    resolution: {integrity: sha512-/3GptzWzu0+0MBQFrDKzw/DvvMTUORvgY6k6jd/VS6iCR4RDTKWH6v6WPwQoUO8667uQEf9Oe38DxAYWY5F/Ug==}
+    engines: {node: '>=0.10.0'}
 
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
+
+  sourcemap-codec@1.4.8:
+    resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
 
   stackback@0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
@@ -851,18 +865,6 @@ packages:
     resolution: {integrity: sha512-hUrmaWBdVDcxvYqnyh09zunKzROWjbZTiNy8dBEjkS7ehEDQibXJ7XvlmtbwuTclUiIyN+CyXQD4Vmko8fNm8w==}
     engines: {node: '>=8'}
     hasBin: true
-
-  ws@7.5.10:
-    resolution: {integrity: sha512-+dbF1tHwZpXcbOJdVOkzLDxZP1ailvSxM6ZweXTegylPny803bFhA+vqBYw4s31NSAk4S2Qz+AKXK9a4wkdjcQ==}
-    engines: {node: '>=8.3.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
 
   ws@8.18.0:
     resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
@@ -1086,10 +1088,19 @@ snapshots:
 
   '@types/prop-types@15.7.13': {}
 
+  '@types/react-devtools-inline@4.24.8':
+    dependencies:
+      '@types/react': 18.3.11
+      '@types/react-reconciler': 0.28.8
+
   '@types/react-dom@18.3.1':
     dependencies:
       '@types/react': 18.3.11
     optional: true
+
+  '@types/react-reconciler@0.28.8':
+    dependencies:
+      '@types/react': 18.3.11
 
   '@types/react@18.3.11':
     dependencies:
@@ -1398,13 +1409,10 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  react-devtools-core@6.0.1:
+  react-devtools-inline@6.0.1:
     dependencies:
-      shell-quote: 1.8.1
-      ws: 7.5.10
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
+      source-map-js: 0.6.2
+      sourcemap-codec: 1.4.8
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
@@ -1454,11 +1462,13 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  shell-quote@1.8.1: {}
-
   siginfo@2.0.0: {}
 
+  source-map-js@0.6.2: {}
+
   source-map-js@1.2.1: {}
+
+  sourcemap-codec@1.4.8: {}
 
   stackback@0.0.2: {}
 
@@ -1580,8 +1590,6 @@ snapshots:
     dependencies:
       siginfo: 2.0.0
       stackback: 0.0.2
-
-  ws@7.5.10: {}
 
   ws@8.18.0: {}
 

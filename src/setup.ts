@@ -27,5 +27,5 @@
  * ```
  */
 
-import { initialize } from "react-devtools-core";
-initialize();
+import { initialize } from "react-devtools-inline";
+initialize(window);

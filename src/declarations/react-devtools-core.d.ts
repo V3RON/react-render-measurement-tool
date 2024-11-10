@@ -1,3 +1,7 @@
-declare module "react-devtools-core" {
-	export function initialize(): void;
+import type { ComponentType } from "react";
+
+declare module "react-devtools-inline" {
+	export interface RendererInterface {
+		getElementSourceFunctionById: (id: number) => null | ComponentType;
+	}
 }
