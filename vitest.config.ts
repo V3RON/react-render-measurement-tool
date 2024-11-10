@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
 	test: {
-		setupFiles: ["./src/setup.ts"],
+		setupFiles: ["react-render-measurement-tool/setup"],
 		environment: "jsdom",
 	},
 });

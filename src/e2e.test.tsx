@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import userEvent from "@testing-library/user-event";
 import React, { Suspense, useState } from "react";
+import { measure } from "react-render-measurement-tool";
 import { expect, it } from "vitest";
-import { measure } from "./measure";
 
 const Screen = () => {
 	const [v, setV] = useState(0);
