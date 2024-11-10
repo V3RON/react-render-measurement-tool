@@ -8,17 +8,71 @@ The React Render Measurement Tool is an experimental utility designed to gather 
 
 ## Features
 
-- **Render Counting:** Count all renders of the provided `ReactElement`.
-- **Component Tracking:** Store references to all rendered components.
-- **Scenario Execution:** Execute actions (such as clicking buttons) that may trigger additional renders, with the ability to record those renders.
+- **Render counting:** Count all renders of the provided `ReactElement`.
+- **Component tracking:** Store references to all rendered components.
+- **Scenario execution:** Execute actions (such as clicking buttons) that may trigger additional renders, with the ability to record those renders.
 
 ## Usage
 
 To use the `measure` function from this tool, follow the instructions below:
 
-### Installation
+## Installation
 
-*This section is a work in progress.*
+1. Install the package using your favorite package manager:
+
+   ```bash
+   # Using npm
+   npm install react-render-measurement-tool
+  
+   # Using yarn
+   yarn add react-render-measurement-tool
+  
+   # Using pnpm
+   pnpm add react-render-measurement-tool
+   ```
+
+2. Import the setup file in your Jest or Vitest setup file:
+
+   ```javascript
+   import 'react-render-measurement-tool/setup';
+   ```
+
+3. Use the `measure` function to gather profiling data by passing a `scenario`:
+
+    ```javascript
+    import userEvent from '@testing-library/user-event';
+    import { useState } from 'react';
+    import { measure } from 'react-render-measurement-tool';
+    
+    it('should render twice', async () => {
+      const Component = () => {
+        const [value, setValue] = useState(0);
+    
+        return (
+          <button onClick={() => setValue(v => v + 1)}>
+            Re-render
+          </button>
+        );
+      };
+    
+      const result = await measure(<Component />, {
+        scenario: async (screen) => {
+          await userEvent.click(screen.getByText('Re-render'));
+        },
+      });
+    
+      expect(result.commits).toHaveLength(2);
+    });
+    ```
+
+4. You can assert the profiling results. For example, to check if a component was rendered:
+
+   ```javascript
+   expect(result.commits).toHaveLength(2);
+   expect(result.commits[0].changes).toContainEqual(
+     expect.objectContaining({ componentType: Componnet })
+   );
+   ```
 
 ### API
 
