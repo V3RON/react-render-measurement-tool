@@ -1,6 +1,6 @@
 import { type RenderResult, render } from "@testing-library/react";
 import type * as React from "react";
-import { getOperations, getRendererInterface } from "./devtools.ts";
+import { getOperations, getRendererInterface } from "./devtools";
 import type { MeasureResult } from "./types";
 
 export interface MeasureOptions {
