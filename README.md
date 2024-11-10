@@ -29,7 +29,7 @@ To use the `measure` function from this tool, follow the instructions below:
     - `options` (optional): An object to configure the measurement, such as defining scenarios to execute.
 
 - **Returns:**
-    - An array containing objects of the `ProfilingData` type, which includes details about the render metrics.
+    - An array containing objects of the `MeasureResult` type, which includes details about the render metrics.
 
 ## Contributing
 
@@ -38,7 +38,3 @@ Contributions to this tool are welcome! If you have ideas, suggestions, or bug r
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-This tool is inspired by the need for better visibility into React rendering behavior during tests. Thank you for your interest, and we hope it proves useful in your development workflow!
