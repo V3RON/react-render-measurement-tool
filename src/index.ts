@@ -1,3 +1,3 @@
-export { measure } from "./measure";
-export type { MeasureOptions } from "./measure";
-export type * from "./types";
+export { measure } from "./measure.js";
+export type { MeasureOptions } from "./measure.js";
+export type * from "./types.js";
