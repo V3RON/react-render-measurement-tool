@@ -2,42 +2,42 @@
 
 ## Overview
 
-The React Render Measurement Tool is an experimental utility designed to gather detailed information about React component renders while executing tests. This tool helps developers understand the rendering behavior of their React applications by tracking the number of renders and storing references to the rendered components.
+The React Render Measurement Tool is an experimental utility designed to provide insights into React component rendering behavior during test execution. By counting renders and tracking references to rendered components, this tool helps developers better understand and optimize their React applications.
 
-> **Note:** This tool is currently a work in progress and is not available on npm. There is no straightforward way to install or use it at this time.
+> **Note:** This tool is currently under active development and is not yet available on npm, so installation and usage options are limited.
 
 ## Features
 
-- **Render counting:** Count all renders of the provided `ReactElement`.
-- **Component tracking:** Store references to all rendered components.
-- **Scenario execution:** Execute actions (such as clicking buttons) that may trigger additional renders, with the ability to record those renders.
+- **Render Counting:** Tracks the number of renders for the specified `ReactElement`.
+- **Component Tracking:** Stores references to all rendered components for easy inspection.
+- **Scenario Execution:** Allows execution of actions (e.g., button clicks) that may trigger re-renders, with the ability to monitor and record these renders.
 
 ## Usage
 
-To use the `measure` function from this tool, follow the instructions below:
+Follow the steps below to use the `measure` function and gather render profiling data:
 
-## Installation
+### Installation
 
-1. Install the package using your favorite package manager:
+1. Add the package via your preferred package manager:
 
    ```bash
-   # Using npm
+   # npm
    npm install react-render-measurement-tool
   
-   # Using yarn
+   # yarn
    yarn add react-render-measurement-tool
   
-   # Using pnpm
+   # pnpm
    pnpm add react-render-measurement-tool
    ```
 
-2. Import the setup file in your Jest or Vitest setup file:
+2. Import the setup file in your Jest or Vitest configuration:
 
    ```javascript
    import 'react-render-measurement-tool/setup';
    ```
 
-3. Use the `measure` function to gather profiling data by passing a `scenario`:
+3. Use the `measure` function to capture render metrics by specifying a `scenario`:
 
     ```javascript
     import userEvent from '@testing-library/user-event';
@@ -65,12 +65,12 @@ To use the `measure` function from this tool, follow the instructions below:
     });
     ```
 
-4. You can assert the profiling results. For example, to check if a component was rendered:
+4. Assert the profiling results. For example, to verify that a component rendered twice:
 
    ```javascript
    expect(result.commits).toHaveLength(2);
    expect(result.commits[0].changes).toContainEqual(
-     expect.objectContaining({ componentType: Componnet })
+     expect.objectContaining({ componentType: Component })
    );
    ```
 
@@ -79,16 +79,16 @@ To use the `measure` function from this tool, follow the instructions below:
 #### `measure(ui, options)`
 
 - **Parameters:**
-    - `ui`: The React element to render.
-    - `options` (optional): An object to configure the measurement, such as defining scenarios to execute.
+    - `ui`: The React element to be rendered.
+    - `options` (optional): An object to customize the measurement, including the option to define scenarios for testing.
 
 - **Returns:**
-    - An array containing objects of the `MeasureResult` type, which includes details about the render metrics.
+    - An array of `MeasureResult` objects, each containing detailed render metrics.
 
 ## Contributing
 
-Contributions to this tool are welcome! If you have ideas, suggestions, or bug reports, please feel free to open an issue or submit a pull request.
+Contributions are welcome! If you have ideas, suggestions, or encounter issues, please open an issue or submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
