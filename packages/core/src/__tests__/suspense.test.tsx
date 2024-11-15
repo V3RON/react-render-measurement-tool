@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { describe, expect, it } from "vitest";
-import { measure } from "../measure";
+import { measure } from "./utils";
 
 describe("Suspense", () => {
   it("should count React.lazy re-renders", async () => {

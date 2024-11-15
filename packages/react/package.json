@@ -1,0 +1,44 @@
+{
+	"name": "@react-render-measurement-tool/react",
+	"description": "",
+	"version": "0.0.1",
+	"type": "module",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"require": "./dist/index.js",
+			"import": "./dist/index.js",
+			"default": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "tsup",
+		"test": "vitest",
+		"lint": "biome lint",
+		"format": "biome format --write",
+		"check": "biome check",
+		"check:apply": "biome check --apply"
+	},
+	"peerDependencies": {
+		"@testing-library/react": "^16.0.1",
+		"@react-render-measurement-tool/core": "workspace:"
+	},
+	"devDependencies": {
+		"@testing-library/react": "^16.0.1",
+		"@testing-library/user-event": "^14.5.2",
+		"@types/react": "^18.3.11",
+		"react": "^18.3.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/V3RON/react-render-measurement-tool.git"
+	},
+	"bugs": {
+		"url": "https://github.com/V3RON/react-render-measurement-tool/issues"
+	},
+	"homepage": "https://github.com/V3RON/react-render-measurement-tool#readme",
+	"license": "MIT"
+}

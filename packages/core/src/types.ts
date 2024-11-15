@@ -1,5 +1,10 @@
-import type { ComponentType } from "react";
+import type { ComponentType, ReactElement } from "react";
 import type { ProfilingDataBackend } from "react-devtools-inline";
+
+export type ReactRenderer<TRenderResult> = {
+  name: string;
+  render: (ui: ReactElement) => TRenderResult;
+};
 
 export type ChangeData = {
   context: string[] | boolean | null;

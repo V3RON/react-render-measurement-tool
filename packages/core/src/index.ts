@@ -1,3 +1,3 @@
-export { measure } from "./measure";
-export type { MeasureOptions } from "./measure";
+export { createMeasure } from "./measure";
+export type { MeasureFunc, MeasureOptions } from "./measure";
 export type * from "./types";

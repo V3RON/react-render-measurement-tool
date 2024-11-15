@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { type MeasureOptions, measure } from "../measure";
+import type { MeasureOptions } from "../measure";
+import { measure } from "./utils";
 
 const UI = <div>Test component</div>;
 
