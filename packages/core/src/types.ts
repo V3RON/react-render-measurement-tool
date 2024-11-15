@@ -7,7 +7,7 @@ export type ReactRenderer<TRenderResult> = {
 };
 
 export type ChangeData = {
-  context: string[] | boolean | null;
+  context: boolean;
   didHooksChange: boolean;
   isFirstMount: boolean;
   props: string[] | null;
@@ -18,7 +18,6 @@ export type ChangeData = {
 
 export type CommitData = {
   duration: number;
-  priorityLevel: string | null;
   timestamp: number;
   changes: ChangeData[];
 };

@@ -1,10 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
-import type { MeasureOptions } from "../measure";
-import { measure } from "./utils";
+import { type MeasureOptions, measure } from "./utils";
 
 const UI = <div>Test component</div>;
 
-describe("Scenario", () => {
+describe("[React]Scenario", () => {
   it("should call the provided scenario function with the RenderResult", async () => {
     const mockScenario = vi.fn(() => Promise.resolve());
     const options: MeasureOptions = { scenario: mockScenario };

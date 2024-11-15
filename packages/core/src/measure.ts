@@ -40,13 +40,12 @@ export const createMeasure = <TRenderResult>(renderer: ReactRenderer<TRenderResu
               props: change.props,
               state: change.state,
               hooks: change.hooks ?? null,
-              context: change.context,
+              context: !!change.context,
               componentType: devTools.getElementSourceFunctionById(fiberId),
             }))
           : [],
         timestamp: commit.timestamp,
         duration: commit.duration,
-        priorityLevel: commit.priorityLevel,
       })),
       exportProfilingData: () => ({
         version: 5,

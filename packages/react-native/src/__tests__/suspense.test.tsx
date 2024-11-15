@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
-import { describe, expect, it } from "vitest";
+import { Text, View } from "react-native";
 import { measure } from "./utils";
 
-describe("Suspense", () => {
+describe("[React Native] Suspense", () => {
   it("should count React.lazy re-renders", async () => {
     const LazyLoadedComponent = () => {
-      return <div>Lazy loaded!</div>;
+      return <Text>Lazy loaded!</Text>;
     };
 
     const LazyComponent = React.lazy<typeof LazyLoadedComponent>(
@@ -16,9 +16,11 @@ describe("Suspense", () => {
     );
 
     const { commits } = await measure(
-      <Suspense fallback={<div>Loading</div>}>
-        <LazyComponent />
-      </Suspense>,
+      <View>
+        <Suspense fallback={<Text>Loading</Text>}>
+          <LazyComponent />
+        </Suspense>
+      </View>,
       {
         scenario: async (screen) => {
           await screen.findByText("Lazy loaded!");

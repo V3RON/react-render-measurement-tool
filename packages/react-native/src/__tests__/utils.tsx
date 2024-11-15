@@ -1,4 +1,5 @@
 import { createMeasure } from "@react-render-measurement-tool/core";
-import { renderer } from "..";
+import { MeasureOptions, renderer } from "..";
 
 export const measure = createMeasure(renderer);
+export { MeasureOptions };
