@@ -1,4 +1,4 @@
-import { measure } from "./utils";
+import { measure } from "..";
 
 describe("[React Native] General", () => {
   it("should include initial render", async () => {

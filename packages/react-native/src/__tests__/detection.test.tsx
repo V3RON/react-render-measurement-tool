@@ -2,7 +2,7 @@ import type { ChangeData } from "@react-render-measurement-tool/core";
 import { userEvent } from "@testing-library/react-native";
 import React, { createContext, useContext, memo, useState } from "react";
 import { Pressable, Text } from "react-native";
-import { measure } from "./utils";
+import { measure } from "..";
 
 describe("[React Native] Detection", () => {
   it("should detect context changes", async () => {

@@ -1,4 +1,9 @@
-import type { MeasureOptions as CoreMeasureOptions, ReactRenderer } from "@react-render-measurement-tool/core";
+import {
+  type MeasureFunc as CoreMeasureFunc,
+  type MeasureOptions as CoreMeasureOptions,
+  type ReactRenderer,
+  createMeasure,
+} from "@react-render-measurement-tool/core";
 import { type RenderResult, render } from "@testing-library/react";
 
 export const renderer: ReactRenderer<RenderResult> = {
@@ -6,4 +11,6 @@ export const renderer: ReactRenderer<RenderResult> = {
   render,
 };
 
+export const measure = createMeasure(renderer);
 export type MeasureOptions = CoreMeasureOptions<RenderResult>;
+export type MeasureFunc = CoreMeasureFunc<RenderResult>;

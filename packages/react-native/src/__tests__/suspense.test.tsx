@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Text, View } from "react-native";
-import { measure } from "./utils";
+import { measure } from "..";
 
 describe("[React Native] Suspense", () => {
   it("should count React.lazy re-renders", async () => {

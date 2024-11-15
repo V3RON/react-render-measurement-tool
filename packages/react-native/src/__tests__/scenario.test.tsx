@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { type MeasureOptions, measure } from "./utils";
+import { type MeasureOptions, measure } from "..";
 
 const UI = <Text>Test component</Text>;
 

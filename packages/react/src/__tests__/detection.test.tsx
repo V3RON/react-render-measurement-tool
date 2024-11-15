@@ -2,7 +2,7 @@ import type { ChangeData } from "@react-render-measurement-tool/core";
 import { userEvent } from "@testing-library/user-event";
 import React, { createContext, useContext, memo, useState } from "react";
 import { describe, expect, it } from "vitest";
-import { measure } from "./utils";
+import { measure } from "..";
 
 describe("[React] Detection", () => {
   it("should detect context changes", async () => {

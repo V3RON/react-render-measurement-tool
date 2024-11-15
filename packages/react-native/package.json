@@ -22,6 +22,7 @@
 		"check": "biome check",
 		"check:apply": "biome check --apply"
 	},
+	"dependencies": {},
 	"peerDependencies": {
 		"@react-render-measurement-tool/core": "workspace:^",
 		"@testing-library/react-native": "^12.8.1",
