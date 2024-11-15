@@ -3,15 +3,34 @@ import type { ProfilingDataForRootBackend } from "react-devtools-inline";
 import { getOperations, getRendererInterface } from "./devtools";
 import type { MeasureResult, ReactRenderer } from "./types";
 
+/**
+ * Configuration options for measuring React component rendering performance
+ * @template TRenderResult The testing library's render result type (e.g. RTL's RenderResult)
+ */
 export interface MeasureOptions<TRenderResult> {
+  /**
+   * Define an async scenario to run after the initial render.
+   * Useful for measuring performance after user interactions or data loading.
+   * @param screen The testing library's screen utilities for querying and interacting with components
+   */
   scenario?: (screen: TRenderResult) => Promise<void>;
 }
 
+/**
+ * A function to measure React component rendering performance
+ * @template TRenderResult The testing library's render result type (e.g. RTL's RenderResult)
+ */
 export type MeasureFunc<TRenderResult> = (
   ui: React.ReactElement,
   options?: MeasureOptions<TRenderResult>,
 ) => Promise<MeasureResult>;
 
+/**
+ * Creates a measurement function compatible with your testing environment
+ * @template TRenderResult The testing library's render result type (e.g. RTL's RenderResult)
+ * @param renderer Your testing environment's renderer (e.g. React Testing Library or React Native Testing Library)
+ * @returns A function to measure rendering performance of your React components
+ */
 export const createMeasure = <TRenderResult>(renderer: ReactRenderer<TRenderResult>): MeasureFunc<TRenderResult> => {
   return async (ui: React.ReactElement, options?: MeasureOptions<TRenderResult>): Promise<MeasureResult> => {
     const devTools = getRendererInterface();
