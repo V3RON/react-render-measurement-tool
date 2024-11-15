@@ -1,4 +1,5 @@
 import type React from "react";
+import type { ProfilingDataForRootBackend } from "react-devtools-inline";
 import { getOperations, getRendererInterface } from "./devtools";
 import type { MeasureResult, ReactRenderer } from "./types";
 
@@ -27,8 +28,7 @@ export const createMeasure = <TRenderResult>(renderer: ReactRenderer<TRenderResu
     const profilingData = devTools.getProfilingData();
     const operations = getOperations(devTools);
 
-    console.assert(profilingData.dataForRoots.length === 1);
-    const rootData = profilingData.dataForRoots[0];
+    const rootData = profilingData.dataForRoots.at(-1) as ProfilingDataForRootBackend;
 
     return {
       rawProfilingData: profilingData,
