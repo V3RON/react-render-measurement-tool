@@ -1,94 +1,153 @@
-# React Render Measurement Tool
+<div align="center">
 
-## Overview
+# 🔍 React Render Measurement Tool
 
-The React Render Measurement Tool is an experimental utility designed to provide insights into React component rendering behavior during test execution. By counting renders and tracking references to rendered components, this tool helps developers better understand and optimize their React applications.
+[![Version](https://img.shields.io/npm/v/@react-render-measurement-tool/core?color=blue&label=version)](https://www.npmjs.com/package/@react-render-measurement-tool/core)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/V3RON/react-render-measurement-tool/pulls)
 
-> **Note:** This tool is currently under active development and is not yet available on npm, so installation and usage options are limited.
+### Measure React component rendering with precision 📊
 
-## Features
+<p align="center">
+  <strong>Debug • Profile • Optimize</strong>
+  <br />
+  <sub>A powerful tool for understanding how your React components render during tests.</sub>
+</p>
 
-- **Render Counting:** Tracks the number of renders for the specified `ReactElement`.
-- **Component Tracking:** Stores references to all rendered components for easy inspection.
-- **Scenario Execution:** Allows execution of actions (e.g., button clicks) that may trigger re-renders, with the ability to monitor and record these renders.
+[Getting Started](#-getting-started) •
+[Features](#-key-features) •
+[Documentation](#-api-reference) •
+[Contributing](#-contributing)
 
-## Usage
+---
 
-Follow the steps below to use the `measure` function and gather render profiling data:
+</div>
 
-### Installation
+## ✨ What is it?
 
-1. Add the package via your preferred package manager:
+A powerful developer tool that helps you understand and optimize how your React components render during tests. Get detailed insights into render counts, component behavior, and performance metrics - all within your testing environment.
 
-   ```bash
-   # npm
-   npm install react-render-measurement-tool
-  
-   # yarn
-   yarn add react-render-measurement-tool
-  
-   # pnpm
-   pnpm add react-render-measurement-tool
-   ```
+> 🚧 **Beta Notice:** This project is under active development and not yet available on npm. Stay tuned for the first release!
 
-2. Import the setup file in your Jest or Vitest configuration:
+## 🎯 Key Features
 
-   ```javascript
-   import 'react-render-measurement-tool/setup';
-   ```
+- 📊 **Precise Render Tracking:** Count and analyze component renders with accuracy
+- 🔄 **Component Reference Tracking:** Keep tabs on all rendered components
+- 🎬 **Scenario Testing:** Measure performance during user interactions and state changes
+- 📈 **Detailed Metrics:** Get comprehensive data about component updates and timing
 
-3. Use the `measure` function to capture render metrics by specifying a `scenario`:
+## 🚀 Getting Started
 
-    ```javascript
-    import userEvent from '@testing-library/user-event';
-    import { useState } from 'react';
-    import { measure } from 'react-render-measurement-tool';
-    
-    it('should render twice', async () => {
-      const Component = () => {
-        const [value, setValue] = useState(0);
-    
-        return (
-          <button onClick={() => setValue(v => v + 1)}>
-            Re-render
-          </button>
-        );
-      };
-    
-      const result = await measure(<Component />, {
-        scenario: async (screen) => {
-          await userEvent.click(screen.getByText('Re-render'));
-        },
-      });
-    
-      expect(result.commits).toHaveLength(2);
-    });
-    ```
+### 1. Installation
 
-4. Assert the profiling results. For example, to verify that a component rendered twice:
+Choose the package that matches your environment:
 
-   ```javascript
-   expect(result.commits).toHaveLength(2);
-   expect(result.commits[0].changes).toContainEqual(
-     expect.objectContaining({ componentType: Component })
-   );
-   ```
+**For React Web:**
+```bash
+# npm
+npm install @react-render-measurement-tool/core @react-render-measurement-tool/react
 
-### API
+# yarn
+yarn add @react-render-measurement-tool/core @react-render-measurement-tool/react
 
-#### `measure(ui, options)`
+# pnpm
+pnpm add @react-render-measurement-tool/core @react-render-measurement-tool/react
+```
 
-- **Parameters:**
-    - `ui`: The React element to be rendered.
-    - `options` (optional): An object to customize the measurement, including the option to define scenarios for testing.
+**For React Native:**
+```bash
+# npm
+npm install @react-render-measurement-tool/core @react-render-measurement-tool/react-native
 
-- **Returns:**
-    - An array of `MeasureResult` objects, each containing detailed render metrics.
+# yarn
+yarn add @react-render-measurement-tool/core @react-render-measurement-tool/react-native
 
-## Contributing
+# pnpm
+pnpm add @react-render-measurement-tool/core @react-render-measurement-tool/react-native
+```
 
-Contributions are welcome! If you have ideas, suggestions, or encounter issues, please open an issue or submit a pull request.
+### 2. Setup
 
-## License
+Add the setup file to your test configuration:
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
+```javascript
+// In your Jest or Vitest setup
+import '@react-render-measurement-tool/core/setup';
+```
+
+### 3. Usage
+
+Import from the appropriate package based on your environment:
+
+```typescript
+// For React Web
+import { measure } from '@react-render-measurement-tool/react';
+
+// For React Native
+import { measure } from '@react-render-measurement-tool/react-native';
+```
+
+Here's a quick example of measuring render performance:
+
+```typescript
+import userEvent from '@testing-library/user-event';
+import { useState } from 'react';
+import { measure } from '@react-render-measurement-tool/react';
+
+it('tracks re-renders after state changes', async () => {
+  const Counter = () => {
+    const [count, setCount] = useState(0);
+    return (
+      <button onClick={() => setCount(v => v + 1)}>
+        Count: {count}
+      </button>
+    );
+  };
+
+  const result = await measure(<Counter />, {
+    scenario: async (screen) => {
+      await userEvent.click(screen.getByRole('button'));
+    },
+  });
+
+  expect(result.commits).toHaveLength(2); // Initial render + click update
+});
+```
+
+## 📦 Package Structure
+
+The tool consists of three packages:
+- `@react-render-measurement-tool/core`: Core functionality and DevTools integration
+- `@react-render-measurement-tool/react`: React Web specific implementation
+- `@react-render-measurement-tool/react-native`: React Native specific implementation
+
+## 📖 API Reference
+
+### `measure(ui, options)`
+
+Measures rendering performance of a React component.
+
+**Parameters:**
+- `ui`: `ReactElement` - The component to measure
+- `options`: (Optional)
+  - `scenario`: Function to execute actions after initial render
+
+**Returns:**
+- `Promise<MeasureResult>` containing:
+  - `commits`: Detailed render information
+  - `rawProfilingData`: Raw performance metrics
+  - `exportProfilingData`: Function to export DevTools-compatible data
+
+## 🤝 Contributing
+
+We love contributions! Whether it's:
+- 🐛 Bug reports
+- 💡 Feature suggestions
+- 📝 Documentation improvements
+- 🔧 Code contributions
+
+Feel free to open an issue or submit a PR!
+
+## 📄 License
+
+MIT Licensed. See [LICENSE](LICENSE) for details.
