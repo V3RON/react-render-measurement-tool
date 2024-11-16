@@ -1,6 +1,6 @@
 import type React from "react";
-import type { ProfilingDataForRootBackend } from "react-devtools-inline";
-import { getOperations, getRendererInterface } from "./devtools";
+import { getOperations, getRendererInterface, getTestRootProfilingData } from "./devtools";
+import { getCommits, getSummary } from "./mapper";
 import type { MeasureResult, ReactRenderer } from "./types";
 
 /**
@@ -33,7 +33,8 @@ export type MeasureFunc<TRenderResult> = (
  */
 export const createMeasure = <TRenderResult>(renderer: ReactRenderer<TRenderResult>): MeasureFunc<TRenderResult> => {
   return async (ui: React.ReactElement, options?: MeasureOptions<TRenderResult>): Promise<MeasureResult> => {
-    const devTools = getRendererInterface();
+    const hook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+    const devTools = getRendererInterface(hook);
 
     devTools.startProfiling(true);
     const renderResult = renderer.render(ui);
@@ -46,31 +47,17 @@ export const createMeasure = <TRenderResult>(renderer: ReactRenderer<TRenderResu
 
     const profilingData = devTools.getProfilingData();
     const operations = getOperations(devTools);
-
-    const rootData = profilingData.dataForRoots.at(-1) as ProfilingDataForRootBackend;
+    const testRootData = getTestRootProfilingData(profilingData);
 
     return {
+      summary: getSummary(testRootData),
+      commits: getCommits(devTools, testRootData),
       rawProfilingData: profilingData,
-      commits: rootData.commitData.map((commit) => ({
-        changes: commit.changeDescriptions
-          ? commit.changeDescriptions.map(([fiberId, change]) => ({
-              isFirstMount: change.isFirstMount,
-              didHooksChange: change.didHooksChange,
-              props: change.props,
-              state: change.state,
-              hooks: change.hooks ?? null,
-              context: !!change.context,
-              componentType: devTools.getElementSourceFunctionById(fiberId),
-            }))
-          : [],
-        timestamp: commit.timestamp,
-        duration: commit.duration,
-      })),
       exportProfilingData: () => ({
         version: 5,
         dataForRoots: [
           {
-            ...rootData,
+            ...testRootData,
             operations,
           },
         ],

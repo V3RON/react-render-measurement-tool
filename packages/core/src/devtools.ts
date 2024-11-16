@@ -1,8 +1,11 @@
-import type { RendererInterface } from "react-devtools-inline";
+import type {
+  DevToolsHook,
+  ProfilingDataBackend,
+  ProfilingDataForRootBackend,
+  RendererInterface,
+} from "react-devtools-inline";
 
-export const getRendererInterface = (): RendererInterface => {
-  const hook = window.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-
+export const getRendererInterface = (hook: DevToolsHook): RendererInterface => {
   if (
     !hook ||
     typeof hook !== "object" ||
@@ -37,4 +40,15 @@ export const getOperations = (devTools: RendererInterface): number[][] => {
 
   unsubscribe();
   return operations;
+};
+
+export const getTestRootProfilingData = (profilingData: ProfilingDataBackend): ProfilingDataForRootBackend => {
+  // We assume it's always the last one.
+  const data = profilingData.dataForRoots.at(-1);
+
+  if (!data) {
+    throw new Error("Test root not found!");
+  }
+
+  return data;
 };

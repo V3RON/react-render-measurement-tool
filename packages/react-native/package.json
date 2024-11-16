@@ -16,7 +16,7 @@
 	},
 	"scripts": {
 		"build": "tsup",
-		"test": "jest",
+		"test": "jest --runInBand",
 		"lint": "biome lint",
 		"format": "biome format --write",
 		"check": "biome check",
