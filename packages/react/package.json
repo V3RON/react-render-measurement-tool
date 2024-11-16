@@ -24,7 +24,6 @@
 	},
 	"dependencies": {},
 	"peerDependencies": {
-		"@react-render-measurement-tool/core": "workspace:^",
 		"@testing-library/react": "^16.0.1"
 	},
 	"devDependencies": {

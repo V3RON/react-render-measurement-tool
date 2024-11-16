@@ -45,25 +45,25 @@ Choose the package that matches your environment:
 **For React Web:**
 ```bash
 # npm
-npm install @react-render-measurement-tool/core @react-render-measurement-tool/react
+npm install @react-render-measurement-tool/react
 
 # yarn
-yarn add @react-render-measurement-tool/core @react-render-measurement-tool/react
+yarn add @react-render-measurement-tool/react
 
 # pnpm
-pnpm add @react-render-measurement-tool/core @react-render-measurement-tool/react
+pnpm add @react-render-measurement-tool/react
 ```
 
 **For React Native:**
 ```bash
 # npm
-npm install @react-render-measurement-tool/core @react-render-measurement-tool/react-native
+npm install @react-render-measurement-tool/react-native
 
 # yarn
-yarn add @react-render-measurement-tool/core @react-render-measurement-tool/react-native
+yarn add @react-render-measurement-tool/react-native
 
 # pnpm
-pnpm add @react-render-measurement-tool/core @react-render-measurement-tool/react-native
+pnpm add @react-render-measurement-tool/react-native
 ```
 
 ### 2. Setup

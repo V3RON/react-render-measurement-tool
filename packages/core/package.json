@@ -1,6 +1,7 @@
 {
 	"name": "@react-render-measurement-tool/core",
 	"version": "0.2.0",
+	"private": true,
 	"type": "module",
 	"main": "./dist/index.js",
 	"module": "./dist/index.js",
@@ -26,9 +27,7 @@
 		"check": "biome check",
 		"check:apply": "biome check --apply"
 	},
-	"dependencies": {
-		"react-devtools-inline": "^6.0.1"
-	},
+	"dependencies": {},
 	"peerDependencies": {
 		"react": "^18"
 	},
