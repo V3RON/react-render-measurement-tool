@@ -1,7 +1,7 @@
 {
   "name": "@react-render-measurement-tool/core",
   "description": "A powerful tool for understanding how your React components render during tests.",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "private": true,
   "type": "module",
   "main": "./dist/index.cjs",
