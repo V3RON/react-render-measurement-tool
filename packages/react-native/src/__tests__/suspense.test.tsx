@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
-import { Text, View } from "react-native";
-import { measure } from "..";
+import React, { Suspense } from 'react';
+import { Text, View } from 'react-native';
+import { measure } from '..';
 
-describe("[React Native] Suspense", () => {
-  it("should count React.lazy re-renders", async () => {
+describe('[React Native] Suspense', () => {
+  it('should count React.lazy re-renders', async () => {
     const LazyLoadedComponent = () => {
       return <Text>Lazy loaded!</Text>;
     };
@@ -23,7 +23,7 @@ describe("[React Native] Suspense", () => {
       </View>,
       {
         scenario: async (screen) => {
-          await screen.findByText("Lazy loaded!");
+          await screen.findByText('Lazy loaded!');
         },
       },
     );

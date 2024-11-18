@@ -3,11 +3,11 @@ import {
   type MeasureOptions as CoreMeasureOptions,
   type ReactRenderer,
   createMeasure,
-} from "@react-render-measurement-tool/core";
-import { type RenderResult, render } from "@testing-library/react";
+} from '@react-render-measurement-tool/core';
+import { type RenderResult, render } from '@testing-library/react';
 
 export const renderer: ReactRenderer<RenderResult> = {
-  name: "react",
+  name: 'react',
   render,
 };
 

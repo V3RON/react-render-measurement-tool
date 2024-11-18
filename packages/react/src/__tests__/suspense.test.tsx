@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
-import { describe, expect, it } from "vitest";
-import { measure } from "..";
+import React, { Suspense } from 'react';
+import { describe, expect, it } from 'vitest';
+import { measure } from '..';
 
-describe("[React] Suspense", () => {
-  it("should count React.lazy re-renders", async () => {
+describe('[React] Suspense', () => {
+  it('should count React.lazy re-renders', async () => {
     const LazyLoadedComponent = () => {
       return <div>Lazy loaded!</div>;
     };
@@ -21,7 +21,7 @@ describe("[React] Suspense", () => {
       </Suspense>,
       {
         scenario: async (screen) => {
-          await screen.findByText("Lazy loaded!");
+          await screen.findByText('Lazy loaded!');
         },
       },
     );

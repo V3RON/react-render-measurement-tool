@@ -1,10 +1,10 @@
-import { describe, expect, it, vi } from "vitest";
-import { type MeasureOptions, measure } from "..";
+import { describe, expect, it, vi } from 'vitest';
+import { type MeasureOptions, measure } from '..';
 
 const UI = <div>Test component</div>;
 
-describe("[React]Scenario", () => {
-  it("should call the provided scenario function with the RenderResult", async () => {
+describe('[React]Scenario', () => {
+  it('should call the provided scenario function with the RenderResult', async () => {
     const mockScenario = vi.fn(() => Promise.resolve());
     const options: MeasureOptions = { scenario: mockScenario };
 
@@ -14,7 +14,7 @@ describe("[React]Scenario", () => {
     expect(mockScenario).toHaveBeenCalledTimes(1);
   });
 
-  it("should support async operations within the scenario function", async () => {
+  it('should support async operations within the scenario function', async () => {
     const mockScenario = vi.fn(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });

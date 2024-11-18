@@ -1,7 +1,7 @@
-import type React from "react";
-import { getOperations, getRendererInterface, getTestRootProfilingData } from "./devtools";
-import { getCommits, getSummary } from "./mapper";
-import type { MeasureResult, ReactRenderer } from "./types";
+import type React from 'react';
+import { getOperations, getRendererInterface, getTestRootProfilingData } from './devtools';
+import { getCommits, getSummary } from './mapper';
+import type { MeasureResult, ReactRenderer } from './types';
 
 /**
  * Configuration options for measuring React component rendering performance

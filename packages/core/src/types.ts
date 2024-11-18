@@ -1,5 +1,5 @@
-import type { ComponentType, ReactElement } from "react";
-import type { ProfilingDataBackend } from "react-devtools-inline";
+import type { ComponentType, ReactElement } from 'react';
+import type { ProfilingDataBackend } from 'react-devtools-inline';
 
 /**
  * Represents a React renderer implementation for a specific testing environment

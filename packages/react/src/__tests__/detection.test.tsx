@@ -1,11 +1,11 @@
-import type { ChangeData } from "@react-render-measurement-tool/core";
-import { userEvent } from "@testing-library/user-event";
-import React, { createContext, useContext, memo, useState } from "react";
-import { describe, expect, it } from "vitest";
-import { measure } from "..";
+import type { ChangeData } from '@react-render-measurement-tool/core';
+import { userEvent } from '@testing-library/user-event';
+import React, { createContext, useContext, memo, useState } from 'react';
+import { describe, expect, it } from 'vitest';
+import { measure } from '..';
 
-describe("[React] Detection", () => {
-  it("should detect context changes", async () => {
+describe('[React] Detection', () => {
+  it('should detect context changes', async () => {
     const Context = createContext(0);
     const Consumer = () => {
       useContext(Context);
@@ -33,7 +33,7 @@ describe("[React] Detection", () => {
     expect(consumerChanges.didHooksChange).toBeFalsy();
   });
 
-  it("should detect props changes", async () => {
+  it('should detect props changes', async () => {
     const Component = ({ value }: { value: number }) => {
       return null;
     };
@@ -54,7 +54,7 @@ describe("[React] Detection", () => {
     expect(componentChanges.didHooksChange).toBeFalsy();
   });
 
-  it("should detect class component state changes", async () => {
+  it('should detect class component state changes', async () => {
     class Component extends React.Component<unknown, { value: number }> {
       state = {
         value: 0,
@@ -71,7 +71,7 @@ describe("[React] Detection", () => {
 
     const { commits } = await measure(<Component />, {
       scenario: async (screen) => {
-        await userEvent.click(screen.getByRole("button"));
+        await userEvent.click(screen.getByRole('button'));
       },
     });
 
@@ -82,7 +82,7 @@ describe("[React] Detection", () => {
     expect(componentChanges.didHooksChange).toBeFalsy();
   });
 
-  it("should detect hook state changes", async () => {
+  it('should detect hook state changes', async () => {
     const Component = () => {
       const [value, setValue] = useState(0);
       return (
@@ -94,7 +94,7 @@ describe("[React] Detection", () => {
 
     const { commits } = await measure(<Component />, {
       scenario: async (screen) => {
-        await userEvent.click(screen.getByRole("button"));
+        await userEvent.click(screen.getByRole('button'));
       },
     });
 
@@ -105,7 +105,7 @@ describe("[React] Detection", () => {
     expect(componentChanges.didHooksChange).toBeTruthy();
   });
 
-  it("should correctly identify first mount vs updates", async () => {
+  it('should correctly identify first mount vs updates', async () => {
     const Component = () => {
       const [value, setValue] = useState(0);
       return (
@@ -117,7 +117,7 @@ describe("[React] Detection", () => {
 
     const { commits } = await measure(<Component />, {
       scenario: async (screen) => {
-        await userEvent.click(screen.getByRole("button"));
+        await userEvent.click(screen.getByRole('button'));
       },
     });
 
@@ -132,7 +132,7 @@ describe("[React] Detection", () => {
     expect(updateChanges.isFirstMount).toBeFalsy();
   });
 
-  it("should correctly identify component type", async () => {
+  it('should correctly identify component type', async () => {
     const Component = () => {
       return <span>Test</span>;
     };

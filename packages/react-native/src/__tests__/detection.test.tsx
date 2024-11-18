@@ -1,11 +1,11 @@
-import type { ChangeData } from "@react-render-measurement-tool/core";
-import { userEvent } from "@testing-library/react-native";
-import React, { createContext, useContext, memo, useState } from "react";
-import { Pressable, Text } from "react-native";
-import { measure } from "..";
+import type { ChangeData } from '@react-render-measurement-tool/core';
+import { userEvent } from '@testing-library/react-native';
+import React, { createContext, useContext, memo, useState } from 'react';
+import { Pressable, Text } from 'react-native';
+import { measure } from '..';
 
-describe("[React Native] Detection", () => {
-  it("should detect context changes", async () => {
+describe('[React Native] Detection', () => {
+  it('should detect context changes', async () => {
     const Context = createContext(0);
     const Consumer = () => {
       useContext(Context);
@@ -33,7 +33,7 @@ describe("[React Native] Detection", () => {
     expect(consumerChanges.didHooksChange).toBeFalsy();
   });
 
-  it("should detect props changes", async () => {
+  it('should detect props changes', async () => {
     const Component = ({ value }: { value: number }) => {
       return null;
     };
@@ -54,7 +54,7 @@ describe("[React Native] Detection", () => {
     expect(componentChanges.didHooksChange).toBeFalsy();
   });
 
-  it("should detect class component state changes", async () => {
+  it('should detect class component state changes', async () => {
     class Component extends React.Component<unknown, { value: number }> {
       state = {
         value: 0,
@@ -71,7 +71,7 @@ describe("[React Native] Detection", () => {
 
     const { commits } = await measure(<Component />, {
       scenario: async (screen) => {
-        await userEvent.press(screen.getByRole("button"));
+        await userEvent.press(screen.getByRole('button'));
       },
     });
 
@@ -82,7 +82,7 @@ describe("[React Native] Detection", () => {
     expect(componentChanges.didHooksChange).toBeFalsy();
   });
 
-  it("should detect hook state changes", async () => {
+  it('should detect hook state changes', async () => {
     const Component = () => {
       const [value, setValue] = useState(0);
       return (
@@ -94,7 +94,7 @@ describe("[React Native] Detection", () => {
 
     const { commits } = await measure(<Component />, {
       scenario: async (screen) => {
-        await userEvent.press(screen.getByRole("button"));
+        await userEvent.press(screen.getByRole('button'));
       },
     });
 
@@ -105,7 +105,7 @@ describe("[React Native] Detection", () => {
     expect(componentChanges.didHooksChange).toBeTruthy();
   });
 
-  it("should correctly identify first mount vs updates", async () => {
+  it('should correctly identify first mount vs updates', async () => {
     const Component = () => {
       const [value, setValue] = useState(0);
       return (
@@ -117,7 +117,7 @@ describe("[React Native] Detection", () => {
 
     const { commits } = await measure(<Component />, {
       scenario: async (screen) => {
-        await userEvent.press(screen.getByRole("button"));
+        await userEvent.press(screen.getByRole('button'));
       },
     });
 
@@ -132,7 +132,7 @@ describe("[React Native] Detection", () => {
     expect(updateChanges.isFirstMount).toBeFalsy();
   });
 
-  it("should correctly identify component type", async () => {
+  it('should correctly identify component type', async () => {
     const Component = () => {
       return <Text>Test</Text>;
     };

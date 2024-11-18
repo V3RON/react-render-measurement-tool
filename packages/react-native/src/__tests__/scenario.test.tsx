@@ -1,10 +1,10 @@
-import { Text } from "react-native";
-import { type MeasureOptions, measure } from "..";
+import { Text } from 'react-native';
+import { type MeasureOptions, measure } from '..';
 
 const UI = <Text>Test component</Text>;
 
-describe("[React Native] Scenario", () => {
-  it("should call the provided scenario function with the RenderResult", async () => {
+describe('[React Native] Scenario', () => {
+  it('should call the provided scenario function with the RenderResult', async () => {
     const mockScenario = jest.fn(() => Promise.resolve());
     const options: MeasureOptions = { scenario: mockScenario };
 
@@ -14,7 +14,7 @@ describe("[React Native] Scenario", () => {
     expect(mockScenario).toHaveBeenCalledTimes(1);
   });
 
-  it("should support async operations within the scenario function", async () => {
+  it('should support async operations within the scenario function', async () => {
     const mockScenario = jest.fn(async () => {
       await new Promise((resolve) => setTimeout(resolve, 0));
     });

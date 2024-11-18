@@ -1,1 +1,1 @@
-import "@react-render-measurement-tool/core/setup";
+import '@react-render-measurement-tool/core/setup';

@@ -3,11 +3,11 @@ import {
   type MeasureOptions as CoreMeasureOptions,
   type ReactRenderer,
   createMeasure,
-} from "@react-render-measurement-tool/core";
-import { type RenderResult, render } from "@testing-library/react-native";
+} from '@react-render-measurement-tool/core';
+import { type RenderResult, render } from '@testing-library/react-native';
 
 const renderer: ReactRenderer<RenderResult> = {
-  name: "react-native",
+  name: 'react-native',
   render,
 };
 

@@ -1,48 +1,52 @@
 {
-	"name": "@react-render-measurement-tool/core",
-	"version": "0.2.0",
-	"private": true,
-	"type": "module",
-	"main": "./dist/index.js",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"require": "./dist/index.js",
-			"import": "./dist/index.js",
-			"default": "./dist/index.js"
-		},
-		"./setup": {
-			"types": "./dist/setup.d.ts",
-			"require": "./dist/setup.js",
-			"import": "./dist/setup.js",
-			"default": "./dist/setup.js"
-		}
-	},
-	"scripts": {
-		"build": "tsup",
-		"lint": "biome lint",
-		"format": "biome format --write",
-		"check": "biome check",
-		"check:apply": "biome check --apply"
-	},
-	"dependencies": {},
-	"peerDependencies": {
-		"react": "^18"
-	},
-	"devDependencies": {
-		"@types/node": "^22.7.7",
-		"@types/react": "^18.3.11",
-		"@types/react-devtools-inline": "^4.24.8"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/V3RON/react-render-measurement-tool.git"
-	},
-	"bugs": {
-		"url": "https://github.com/V3RON/react-render-measurement-tool/issues"
-	},
-	"homepage": "https://github.com/V3RON/react-render-measurement-tool#readme",
-	"license": "MIT"
+  "name": "@react-render-measurement-tool/core",
+  "description": "A powerful tool for understanding how your React components render during tests.",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./setup": {
+      "types": "./dist/setup.d.ts",
+      "require": "./dist/setup.cjs",
+      "import": "./dist/setup.js",
+      "default": "./dist/setup.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "biome lint",
+    "format": "biome format --write",
+    "check": "biome check",
+    "check:apply": "biome check --apply"
+  },
+  "dependencies": {
+    "react-devtools-inline": "^6.0.1"
+  },
+  "peerDependencies": {
+    "react": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.7",
+    "@types/react": "^18.3.11",
+    "@types/react-devtools-inline": "^4.24.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V3RON/react-render-measurement-tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/V3RON/react-render-measurement-tool/issues"
+  },
+  "homepage": "https://github.com/V3RON/react-render-measurement-tool#readme",
+  "files": ["dist", "!**/__tests__"],
+  "license": "MIT"
 }

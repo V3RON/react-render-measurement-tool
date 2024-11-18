@@ -1,5 +1,5 @@
-import type { ProfilingDataForRootBackend, RendererInterface } from "react-devtools-inline";
-import type { CommitData, MeasureSummary } from "./types";
+import type { ProfilingDataForRootBackend, RendererInterface } from 'react-devtools-inline';
+import type { CommitData, MeasureSummary } from './types';
 
 export const getSummary = (profilingData: ProfilingDataForRootBackend): MeasureSummary => {
   return {
@@ -15,7 +15,7 @@ export const getSummary = (profilingData: ProfilingDataForRootBackend): MeasureS
 export const getCommits = (devTools: RendererInterface, profilingData: ProfilingDataForRootBackend): CommitData[] => {
   return profilingData.commitData.map((commit) => {
     const changes = (commit.changeDescriptions ?? []).map(([fiberId, change]) => ({
-      componentName: devTools.getDisplayNameForElementID(fiberId) ?? "Unknown",
+      componentName: devTools.getDisplayNameForElementID(fiberId) ?? 'Unknown',
       isFirstMount: change.isFirstMount,
       didHooksChange: change.didHooksChange,
       props: change.props,

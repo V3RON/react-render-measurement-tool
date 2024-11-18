@@ -1,56 +1,63 @@
 {
-	"name": "@react-render-measurement-tool/react-native",
-	"description": "",
-	"version": "0.0.1",
-	"type": "module",
-	"main": "./dist/index.js",
-	"module": "./dist/index.js",
-	"types": "./dist/index.d.ts",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"require": "./dist/index.js",
-			"import": "./dist/index.js",
-			"default": "./dist/index.js"
-		}
-	},
-	"scripts": {
-		"build": "tsup",
-		"test": "jest --runInBand",
-		"lint": "biome lint",
-		"format": "biome format --write",
-		"check": "biome check",
-		"check:apply": "biome check --apply"
-	},
-	"dependencies": {},
-	"peerDependencies": {
-		"@testing-library/react-native": "^12.8.1",
-		"react-test-renderer": "^18.3.1"
-	},
-	"devDependencies": {
-		"@react-render-measurement-tool/core": "workspace:^",
-		"@babel/core": "^7.26.0",
-		"@babel/preset-env": "^7.26.0",
-		"@babel/preset-typescript": "^7.26.0",
-		"@react-native/babel-preset": "^0.76.2",
-		"@testing-library/react": "^16.0.1",
-		"@testing-library/react-native": "^12.8.1",
-		"@types/jest": "^29.5.14",
-		"@types/react": "^18.3.11",
-		"@types/react-native": "^0.73.0",
-		"babel-jest": "^29.7.0",
-		"jest": "^29.7.0",
-		"react": "^18.3.1",
-		"react-native": "^0.76.2",
-		"react-test-renderer": "^18.3.1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/V3RON/react-render-measurement-tool.git"
-	},
-	"bugs": {
-		"url": "https://github.com/V3RON/react-render-measurement-tool/issues"
-	},
-	"homepage": "https://github.com/V3RON/react-render-measurement-tool#readme",
-	"license": "MIT"
+  "name": "@react-render-measurement-tool/react-native",
+  "description": "A powerful tool for understanding how your React components render during tests.",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./setup": {
+      "types": "./dist/setup.d.ts",
+      "require": "./dist/setup.cjs",
+      "import": "./dist/setup.js",
+      "default": "./dist/setup.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "jest --runInBand",
+    "lint": "biome lint",
+    "format": "biome format --write",
+    "check": "biome check",
+    "check:apply": "biome check --apply"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@testing-library/react-native": "^12.8.1",
+    "react-test-renderer": "^18.3.1"
+  },
+  "devDependencies": {
+    "@react-render-measurement-tool/core": "workspace:^",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
+    "@react-native/babel-preset": "^0.76.2",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/react-native": "^12.8.1",
+    "@types/jest": "^29.5.14",
+    "@types/react": "^18.3.11",
+    "@types/react-native": "^0.73.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "react": "^18.3.1",
+    "react-native": "^0.76.2",
+    "react-test-renderer": "^18.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/V3RON/react-render-measurement-tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/V3RON/react-render-measurement-tool/issues"
+  },
+  "homepage": "https://github.com/V3RON/react-render-measurement-tool#readme",
+  "files": ["dist", "!**/__tests__"],
+  "license": "MIT"
 }
