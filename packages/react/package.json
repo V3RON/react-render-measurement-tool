@@ -21,6 +21,7 @@
     }
   },
   "scripts": {
+    "prepare": "cp ../../README.md . && cp ../../LICENSE .",
     "build": "tsup --dts-resolve",
     "test": "vitest run",
     "lint": "biome lint",

@@ -21,6 +21,7 @@
     }
   },
   "scripts": {
+    "prepare": "cp ../../README.md . && cp ../../LICENSE .",
     "build": "tsup",
     "test": "jest --runInBand",
     "lint": "biome lint",

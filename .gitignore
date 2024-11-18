@@ -24,6 +24,8 @@ dist-ssr
 
 # Packages
 packages/**/dist
+packages/**/README.md
+packages/**/LICENSE
 
 # Turbo
 .turbo

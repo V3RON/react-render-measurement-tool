@@ -22,6 +22,7 @@
     }
   },
   "scripts": {
+    "prepare": "cp ../../README.md . && cp ../../LICENSE .",
     "build": "tsup",
     "lint": "biome lint",
     "format": "biome format --write",
