@@ -70,9 +70,14 @@ pnpm add @react-render-measurement-tool/react-native
 
 Add the setup file to your test configuration:
 
+**For React Web:**
 ```javascript
-// In your Jest or Vitest setup
-import '@react-render-measurement-tool/core/setup';
+import '@react-render-measurement-tool/react/setup';
+```
+
+**For React Native:**
+```javascript
+import '@react-render-measurement-tool/react-native/setup';
 ```
 
 ### 3. Usage
