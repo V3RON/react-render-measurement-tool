@@ -1,7 +1,7 @@
 {
   "name": "@react-render-measurement-tool/react-native",
   "description": "A powerful tool for understanding how your React components render during tests.",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
