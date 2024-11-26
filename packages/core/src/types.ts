@@ -34,6 +34,10 @@ export type ChangeData = {
   componentType: ComponentType | null;
 };
 
+export type UpdaterData = {
+  componentType: ComponentType | null;
+  componentName: string;
+};
 /**
  * Represents performance data for a single commit phase
  */
@@ -46,6 +50,7 @@ export type CommitData = {
   relativeTimestamp: number;
   /** Array of changes detected during this commit */
   changes: ChangeData[];
+  updaters: UpdaterData[];
 };
 
 /**

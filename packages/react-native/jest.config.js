@@ -4,4 +4,7 @@ export default {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   transformIgnorePatterns: ['/node_modules/(?!(@react-native|react-native)/).*/'],
   setupFiles: ['./src/setup.ts'],
+  moduleNameMapper: {
+    '^react-test-renderer$': '@react-render-measurement-tool/profiling-renderer',
+  },
 };
