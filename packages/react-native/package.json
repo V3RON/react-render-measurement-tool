@@ -29,17 +29,17 @@
     "check": "biome check",
     "check:apply": "biome check --apply"
   },
-  "dependencies": {},
   "peerDependencies": {
     "@testing-library/react-native": "^12.8.1",
     "react-test-renderer": "^18.3.1"
   },
   "devDependencies": {
-    "@react-render-measurement-tool/core": "workspace:^",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-typescript": "^7.26.0",
     "@react-native/babel-preset": "^0.76.2",
+    "@react-render-measurement-tool/core": "workspace:^",
+    "@react-render-measurement-tool/profiling-renderer": "18.3.1-1",
     "@testing-library/react": "^16.0.1",
     "@testing-library/react-native": "^12.8.1",
     "@types/jest": "^29.5.14",

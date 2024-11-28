@@ -2,7 +2,7 @@
 
 # 🔍 React Render Measurement Tool
 
-[![Version](https://img.shields.io/npm/v/@react-render-measurement-tool/core?color=blue&label=version)](https://www.npmjs.com/package/@react-render-measurement-tool/core)
+[![Version](https://img.shields.io/npm/v/@react-render-measurement-tool/react?color=blue&label=version)](https://www.npmjs.com/package/@react-render-measurement-tool/core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/V3RON/react-render-measurement-tool/pulls)
 
@@ -66,6 +66,19 @@ yarn add @react-render-measurement-tool/react-native
 pnpm add @react-render-measurement-tool/react-native
 ```
 
+Additionally, install the profiling renderer for React Native to enable extra features:
+
+```bash
+# npm
+npm install @react-render-measurement-tool/profiling-renderer
+
+# yarn
+yarn add @react-render-measurement-tool/profiling-renderer
+
+# pnpm
+pnpm add @react-render-measurement-tool/profiling-renderer
+```
+
 ### 2. Setup
 
 Add the setup file to your test configuration:
@@ -78,6 +91,18 @@ import '@react-render-measurement-tool/react/setup';
 **For React Native:**
 ```javascript
 import '@react-render-measurement-tool/react-native/setup';
+```
+
+**Additional Configuration for React Native:**
+
+To enable profiling capabilities, alias react-test-renderer with the installed profiling renderer by updating your Jest configuration:
+
+```javascript
+export default {
+  moduleNameMapper: {
+    '^react-test-renderer$': '@react-render-measuremnt-tool/profiling-renderer',
+  },
+}
 ```
 
 ### 3. Usage

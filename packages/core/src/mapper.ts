@@ -25,11 +25,18 @@ export const getCommits = (devTools: RendererInterface, profilingData: Profiling
       componentType: devTools.getElementSourceFunctionById(fiberId),
     }));
 
+    const updaters =
+      commit.updaters?.map((updater) => ({
+        componentType: devTools.getElementSourceFunctionById(updater.id),
+        componentName: updater.displayName ?? 'Unknown',
+      })) ?? [];
+
     return {
       changes,
       timestamp: commit.timestamp,
       duration: commit.duration,
       relativeTimestamp: commit.timestamp - profilingData.commitData[0].timestamp,
+      updaters,
     };
   });
 };
